@@ -2,6 +2,7 @@
 import DefaultLayout from "../defaultlayout"
 import { Mail, Phone, MapPin, Send, User, MessageCircle } from "lucide-react"
 import { useState, useEffect } from "react"
+import EnquiryForm from "../components/contactEnquiry";
 
 export default function ContactUs() {
   const [form, setForm] = useState({ name: "", email: "", message: "" })
@@ -86,73 +87,7 @@ export default function ContactUs() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white/60 backdrop-blur-xl border border-gray-200 shadow-xl rounded-2xl p-8 md:p-10">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
-
-              <div>
-                <label className="block text-gray-700 font-medium mb-1">
-                  Full Name <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 text-gray-400" size={18} />
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder="Enter your full name"
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1976d2] outline-none"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-gray-700 font-medium mb-1">
-                  Email <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 text-gray-400" size={18} />
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="Enter your email"
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1976d2] outline-none"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-gray-700 font-medium mb-1">
-                  Message <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <MessageCircle className="absolute left-3 top-3 text-gray-400" size={18} />
-                  <textarea
-                    name="message"
-                    required
-                    rows={5}
-                    value={form.message}
-                    onChange={handleChange}
-                    placeholder="Type your message"
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1976d2] outline-none resize-none"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-[#0d47a1] to-[#1565c0] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2"
-              >
-                <Send size={18} />
-                Send Message
-              </button>
-            </form>
-          </div>
+          <EnquiryForm />
         </div>
       </section>
     </DefaultLayout>

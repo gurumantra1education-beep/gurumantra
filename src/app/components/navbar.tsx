@@ -60,7 +60,7 @@ export default function Navbar() {
           </Link>
 
           {/* Program Dropdown */}
-          <div className="relative" onMouseEnter={() => setIsProgramDropdownOpen(true)}>
+          {/* <div className="relative" onMouseEnter={() => setIsProgramDropdownOpen(true)}>
             <button className="font-medium text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-1">
               Program
               <ChevronDown size={16} className={`transition-transform ${isProgramDropdownOpen ? "rotate-180" : ""}`} />
@@ -89,10 +89,10 @@ export default function Navbar() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </div> */}
 
           {/* Exams Dropdown */}
-          <div className="relative" onMouseEnter={() => setIsExamDropdownOpen(true)}>
+          {/* <div className="relative" onMouseEnter={() => setIsExamDropdownOpen(true)}>
             <button className="font-medium text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-1">
               Exams
               <ChevronDown size={16} className={`transition-transform ${isExamDropdownOpen ? "rotate-180" : ""}`} />
@@ -133,10 +133,13 @@ export default function Navbar() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </div> */}
 
           <Link href="/about" className="font-medium text-gray-600 hover:text-blue-600 transition-colors">
             About Us
+          </Link>
+          <Link href="/about" className="font-medium text-gray-600 hover:text-blue-600 transition-colors">
+            MBA
           </Link>
           <Link href="/contact" className="font-medium text-gray-600 hover:text-blue-600 transition-colors">
             Contact
@@ -150,7 +153,7 @@ export default function Navbar() {
           >
             Log in
           </Button>
-          <Button className="hidden md:flex bg-blue-700 hover:bg-blue-600">Get Started</Button>
+          {/* <Button className="hidden md:flex bg-blue-700 hover:bg-blue-600">Get Started</Button> */}
           <motion.button
             className="md:hidden z-50 text-blue-700"
             onClick={() => setIsOpen(!isOpen)}
@@ -196,7 +199,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{
-                    delay: 0.2,
+                    delay: 0.65,
                     duration: 0.5,
                     ease: "easeOut",
                   }}
@@ -211,7 +214,7 @@ export default function Navbar() {
                 </motion.div>
 
                 {/* Program Dropdown */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{
@@ -256,10 +259,10 @@ export default function Navbar() {
                       </motion.ul>
                     )}
                   </AnimatePresence>
-                </motion.div>
+                </motion.div> */}
 
                 {/* Exams Dropdown */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{
@@ -322,7 +325,7 @@ export default function Navbar() {
                       </motion.ul>
                     )}
                   </AnimatePresence>
-                </motion.div>
+                </motion.div> */}
 
                 {/* About Us */}
                 <motion.div
@@ -340,6 +343,23 @@ export default function Navbar() {
                     onClick={() => setIsOpen(false)}
                   >
                     About Us
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    delay: 0.65,
+                    duration: 0.5,
+                    ease: "easeOut",
+                  }}
+                >
+                  <Link
+                    href="/about"
+                    className="text-white hover:text-yellow-400 text-xl font-semibold"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    MBA
                   </Link>
                 </motion.div>
 
@@ -363,7 +383,7 @@ export default function Navbar() {
                 </motion.div>
               </nav>
 
-              <div className="mt-8 flex flex-col gap-4">
+              {/* <div className="mt-8 flex flex-col gap-4">
                 <Button
                   variant="outline"
                   className="border-white text-white hover:bg-white hover:text-blue-800 bg-transparent"
@@ -374,7 +394,7 @@ export default function Navbar() {
                 <Button className="bg-yellow-400 text-gray-900 hover:bg-yellow-400/90" onClick={() => setIsOpen(false)}>
                   Get Started
                 </Button>
-              </div>
+              </div> */}
             </motion.div>
           </>
         )}

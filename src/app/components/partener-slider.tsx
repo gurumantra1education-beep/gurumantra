@@ -284,9 +284,9 @@ const PartnerSlider = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            Apply Now
+                            View Details
                           </a>
-                          <a
+                          {/* <a
                             href={college.details_url}
                             onClick={() => trackCollegeClick(college.id, "details", college.name)}
                             className="flex-1 bg-white border border-[#bbdefb] text-[#1565c0] py-2.5 text-center rounded-lg text-sm font-medium transition-all duration-300 hover:bg-[#e3f2fd] hover:border-[#90caf9] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -294,7 +294,7 @@ const PartnerSlider = () => {
                             rel="noopener noreferrer"
                           >
                             View Details
-                          </a>
+                          </a> */}
                         </div>
                       </div>
                     </div>

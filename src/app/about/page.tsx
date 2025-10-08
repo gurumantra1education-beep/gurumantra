@@ -23,7 +23,7 @@ export default function AboutPage() {
     students: 0,
     colleges: 0,
     success: 0,
-    countries: 0,
+    states: 0,
   })
 
   useEffect(() => {
@@ -44,10 +44,10 @@ export default function AboutPage() {
     }
 
     const timeout = setTimeout(() => {
-      animateCounter(5000, "students")
-      animateCounter(500, "colleges")
+      animateCounter(1000, "students")
+      animateCounter(50, "colleges")
       animateCounter(95, "success")
-      animateCounter(25, "countries")
+      animateCounter(15, "states")
     }, 500)
 
     return () => clearTimeout(timeout)
@@ -142,9 +142,9 @@ export default function AboutPage() {
             </div>
             <div className="group">
               <div className="text-4xl md:text-5xl font-bold text-[#0d47a1] mb-2 group-hover:scale-110 transition-transform duration-300">
-                {counters.countries}+
+                {counters.states}+
               </div>
-              <div className="text-gray-600 font-medium">Countries</div>
+              <div className="text-gray-600 font-medium">States</div>
             </div>
           </div>
         </div>
@@ -316,7 +316,7 @@ export default function AboutPage() {
                 title: "Verified Colleges",
                 description:
                   "We only work with trusted colleges and universities. No misleading claims, just real guidance and authentic connections.",
-                highlight: "500+ Partner Institutions",
+                highlight: "50+ Partner Institutions",
               },
               {
                 icon: Award,
@@ -370,10 +370,10 @@ export default function AboutPage() {
     <Clock size={18} />
     <span>Get Free Counseling</span>
   </button>
-  <button className="flex items-center gap-2 px-6 py-3 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white/10 transition-all">
+  {/* <button className="flex items-center gap-2 px-6 py-3 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white/10 transition-all">
     <Users size={18} />
     <span>Talk to Alumni</span>
-  </button>
+  </button> */}
 </div>
 
           <div className="mt-12 flex justify-center items-center gap-8 text-white/80">

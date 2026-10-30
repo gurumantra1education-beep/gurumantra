@@ -181,7 +181,7 @@
       }
       var msg = 'Hi Guru Mantra, I want free MBA/PGDM counselling.\nName: ' + data.name + '\nPhone: ' + data.phone + (data.email ? '\nEmail: ' + data.email : '') +
         (data.exam ? '\nExam: ' + data.exam : '') + (data.percentile ? '\nPercentile: ' + data.percentile : '') +
-        (data.interest ? '\nInterested in: ' + data.interest : '') + (data.city ? '\nPreferred city: ' + data.city : '') +
+        (data.interest ? '\nInterested in: ' + data.interest : '') + (data.city ? '\nCity: ' + data.city : '') +
         (data.message ? '\nMessage: ' + data.message : '');
       var done = $(form.getAttribute('data-done'));
       if (done) { var link = done.querySelector('[data-wa-done]'); if (link) link.href = wa(msg); form.hidden = true; done.hidden = false; }

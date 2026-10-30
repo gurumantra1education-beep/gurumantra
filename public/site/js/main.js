@@ -50,58 +50,70 @@
       (function step(t) { var k = Math.min(1, (t - t0) / 350); shown = Math.round(from + (to - from) * (1 - Math.pow(1 - k, 3))); count.textContent = shown; if (k < 1) raf = requestAnimationFrame(step); })(t0);
     };
     var tagFor = function (d) { return d >= 2 ? ['Safe', 'safe'] : d >= 0 ? ['Good chance', 'good'] : ['Reach', 'reach']; };
-    var matchEl = function (name, sub, tag, cls) {
-      var m = el('div', 'match'), l = el('span');
+    var COUNTS = window.GM_COUNTS || {};
+    var fmt = function (x) { return Number(x || 0).toLocaleString('en-IN'); };
+    var matchEl = function (name, sub, tag, cls, slug) {
+      var m = el(slug ? 'a' : 'div', 'match'), l = el('span');
+      if (slug) { m.href = '/mba-colleges/' + slug; m.style.textDecoration = 'none'; m.style.color = 'inherit'; }
       l.appendChild(el('b', null, name)); l.appendChild(el('span', 's', sub));
       m.appendChild(l); m.appendChild(el('span', 'tag ' + cls, tag)); return m;
     };
+    var sub = function (c, label) { return (c[3] ? c[3] + ' · ' : '') + label + ' ' + c[1] + ' %ile'; };
     var update = function (fromNum) {
       var n = parseFloat(range.value);
       range.style.setProperty('--fill', ((n - min) / (max - min) * 100) + '%');
       out.firstChild.nodeValue = (n % 1 ? n.toFixed(1) : String(n));
       if (numIn && !fromNum) numIn.value = n;
       var list = CUT.filter(function (c) { return n - c[1] >= -2; }).sort(function (a, b) { return b[1] - a[1]; });
-      if (list.length >= 3) {
-        tween(list.length);
-        vt.textContent = 'B-schools within reach';
-        vb.textContent = n < 70 ? ' + many more via MAT, CMAT and state exams.' : ' Based on previous-year CAT cutoffs.';
-      } else {
-        tween(list.length);
-        vt.textContent = list.length ? 'Within reach on CAT' : 'Different route, still a win';
-        vb.textContent = ' Partner colleges also admit through MAT, CMAT and their own process.';
-      }
+      tween(list.length);
+      vt.textContent = list.length >= 3 ? 'B-schools within reach on CAT' : (list.length ? 'Within reach on CAT' : 'Different route, still a win');
+      vb.textContent = ' Plus ' + fmt(COUNTS.open) + ' more that take CAT, MAT or CMAT without a published cutoff.';
       if (mini) {
         var items = list.length >= 3
-          ? list.slice(0, 3).map(function (c) { var t = tagFor(n - c[1]); return [c[0], 'Cutoff ~' + c[1] + ' %ile', t[0], t[1]]; })
-          : ROUTES.slice(0, 3).map(function (r) { return [r[0], r[1], 'Open', 'safe']; });
+          ? list.slice(0, 3).map(function (c) { var t = tagFor(n - c[1]); return [c[0], sub(c, 'Cutoff ~'), t[0], t[1], c[2]]; })
+          : ROUTES.slice(0, 3).map(function (r) { return [r[0], (r[2] ? r[2] + ' · ' : '') + 'Accepts ' + r[3], 'Open', 'safe', r[1]]; });
         var key = items.map(function (i) { return i[0] + i[2]; }).join('|');
         if (key !== lastKey) {
           lastKey = key; mini.textContent = '';
-          items.forEach(function (it) { mini.appendChild(matchEl(it[0], it[1], it[2], it[3])); });
+          items.forEach(function (it) { mini.appendChild(matchEl(it[0], it[1], it[2], it[3], it[4])); });
           var lk = el('div', 'locked'); lk.innerHTML = LOCK;
-          lk.appendChild(document.createTextNode(list.length > 3 ? (list.length - 3) + ' more on your free shortlist' : 'Full list on your free shortlist'));
+          lk.appendChild(document.createTextNode(list.length > 3 ? fmt(list.length - 3) + ' more on your free shortlist' : 'Full list on your free shortlist'));
           mini.appendChild(lk);
         }
       }
       if (full) {
         full.textContent = '';
-        var groups = [['Safe', 'safe', 'Your percentile is 2+ above the cutoff'], ['Good chance', 'good', 'You are at or just above the cutoff'], ['Reach', 'reach', 'Within 2 percentile of the cutoff']];
+        var groups = [['Safe', 'safe', 'Your percentile is 2+ above the cutoff'], ['Good chance', 'good', 'You are at or up to 2 above the cutoff'], ['Reach', 'reach', 'Within 2 percentile below the cutoff']];
         groups.forEach(function (g) {
           var rows = list.filter(function (c) { return tagFor(n - c[1])[1] === g[1]; });
           var sec = el('section', 'stack');
-          var h = el('div', 'row-head'); h.appendChild(el('h3', 'h3', g[0] + ' (' + rows.length + ')')); h.appendChild(el('span', 'small', g[2]));
+          var h = el('div', 'row-head'); h.appendChild(el('h3', 'h3', g[0] + ' (' + fmt(rows.length) + ')')); h.appendChild(el('span', 'small', g[2]));
           sec.appendChild(h);
           var box = el('div', 'grid-2');
           if (!rows.length) box.appendChild(el('p', 'small', 'None in this band for ' + n + ' %ile.'));
-          rows.forEach(function (c) { box.appendChild(matchEl(c[0], 'Indicative cutoff ' + c[1] + ' %ile', g[0], g[1])); });
-          sec.appendChild(box); full.appendChild(sec);
+          var LIMIT = 24;
+          var draw = function (k) { box.textContent = ''; rows.slice(0, k).forEach(function (c) { box.appendChild(matchEl(c[0], sub(c, 'Indicative cutoff'), g[0], g[1], c[2])); }); };
+          draw(LIMIT);
+          sec.appendChild(box);
+          if (rows.length > LIMIT) {
+            var more = el('button', 'btn btn-line', 'Show all ' + fmt(rows.length)); more.type = 'button'; more.style.alignSelf = 'flex-start';
+            more.addEventListener('click', function () { draw(rows.length); more.remove(); });
+            sec.appendChild(more);
+          }
+          full.appendChild(sec);
         });
         var sec2 = el('section', 'stack');
-        var h2 = el('div', 'row-head'); h2.appendChild(el('h3', 'h3', 'Also open to you: MAT, CMAT & own-test routes')); h2.appendChild(el('span', 'small', 'Partner colleges that do not rely on CAT alone'));
+        var h2 = el('div', 'row-head'); h2.appendChild(el('h3', 'h3', 'Also open to you: no published CAT cutoff')); h2.appendChild(el('span', 'small', 'These colleges admit through CAT, MAT or CMAT plus their own GD/PI. Partner B-schools first.'));
         sec2.appendChild(h2);
         var box2 = el('div', 'grid-2');
-        ROUTES.forEach(function (r) { box2.appendChild(matchEl(r[0], r[1], 'Open', 'info')); });
-        sec2.appendChild(box2); full.appendChild(sec2);
+        ROUTES.slice(0, 12).forEach(function (r) { box2.appendChild(matchEl(r[0], (r[2] ? r[2] + ' · ' : '') + 'Accepts ' + r[3] + (r[4] ? ' · Avg ₹' + r[4] + ' LPA' : ''), 'Open', 'info', r[1])); });
+        sec2.appendChild(box2);
+        var links = el('div', 'chips');
+        [['CAT', COUNTS.cat], ['MAT', COUNTS.mat], ['CMAT', COUNTS.cmat]].forEach(function (x) {
+          var a = el('a', 'btn btn-line', 'All ' + fmt(x[1]) + ' colleges accepting ' + x[0] + ' →'); a.href = '/colleges?exam=' + x[0]; links.appendChild(a);
+        });
+        sec2.appendChild(links);
+        full.appendChild(sec2);
       }
     };
     range.addEventListener('input', function () { update(false); });

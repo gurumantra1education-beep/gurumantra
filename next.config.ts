@@ -43,6 +43,8 @@ const nextConfig = {
         { source: "/contact", destination: "/site/contact.html" },
         { source: "/privacy", destination: "/site/privacy.html" },
         { source: "/mba-colleges/:slug", destination: "/site/college/:slug.html" },
+        { source: "/blog", destination: "/site/blog/index.html" },
+        { source: "/blog/:slug", destination: "/site/blog/:slug.html" },
       ],
     };
   },

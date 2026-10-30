@@ -129,6 +129,7 @@
     var ap = $('d-approvals'); ap.textContent = o.ap || ''; ap.parentElement.hidden = !o.ap;
     var site = $('d-site'); site.hidden = !o.w; if (o.w) { site.href = o.w; site.textContent = 'Official website: ' + o.w.replace(/^https?:\/\//, '').replace(/\/$/, ''); }
     $('d-partner').hidden = !o.pt;
+    $('d-page').href = '/mba-colleges/' + o.u;
     $('d-wa').href = GM.wa('Hi Guru Mantra, I want to check my chances at ' + o.n + (o.c ? ', ' + o.c : '') + '.');
     body.textContent = ''; body.appendChild(el('p', 'small', 'Loading full details…'));
     loadDetails(o).then(function (d) { if ($('d-name').textContent === o.n) fillDetails(o, d); }).catch(function () { body.textContent = ''; body.appendChild(el('p', 'small', 'Could not load details. Please try again.')); });

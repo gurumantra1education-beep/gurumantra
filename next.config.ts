@@ -41,8 +41,14 @@ const nextConfig = {
         { source: "/mba-vs-pgdm", destination: "/site/mba-vs-pgdm.html" },
         { source: "/about", destination: "/site/about.html" },
         { source: "/contact", destination: "/site/contact.html" },
+        { source: "/privacy", destination: "/site/privacy.html" },
+        { source: "/mba-colleges/:slug", destination: "/site/college/:slug.html" },
       ],
     };
+  },
+  // The old /mba placeholder page now points to the college finder.
+  async redirects() {
+    return [{ source: "/mba", destination: "/colleges", permanent: false }];
   },
 };
 

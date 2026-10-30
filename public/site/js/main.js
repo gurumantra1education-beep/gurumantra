@@ -122,13 +122,18 @@
       (FEAT[name] || []).forEach(function (c) {
         var card = el('article', 'card'), inn = el('div', 'card-in'), top = el('div', 'top'), t = el('div', 'tt');
         top.appendChild(el('span', 'mono', ini(c[0])));
-        t.appendChild(el('h3', null, c[0])); t.appendChild(el('span', 'where', c[1] + ' · ' + c[2]));
+        var h3 = el('h3');
+        if (c[7]) { var hl = el('a', null, c[0]); hl.href = '/mba-colleges/' + c[7]; hl.style.textDecoration = 'none'; h3.appendChild(hl); } else h3.textContent = c[0];
+        t.appendChild(h3); t.appendChild(el('span', 'where', c[1] + ' · ' + c[2]));
         top.appendChild(t); inn.appendChild(top);
         var dl = el('dl');
         [['Fees', c[4]], ['Avg pkg', c[5]], ['Highest', c[6]]].forEach(function (p) { var d = el('div'); d.appendChild(el('dt', null, p[0])); d.appendChild(el('dd', null, p[1])); dl.appendChild(d); });
         inn.appendChild(dl);
         var f = el('div', 'foot'); f.appendChild(el('span', 'ex', c[3]));
-        var go = el('a', 'go'); go.href = wa('Hi Guru Mantra, I want to check my chances at ' + c[0] + '.'); go.setAttribute('aria-label', 'Check my chances at ' + c[0] + ' on WhatsApp'); go.innerHTML = ARROW;
+        var go = el('a', 'go');
+        if (c[7]) { go.href = '/mba-colleges/' + c[7]; go.setAttribute('aria-label', 'View full details for ' + c[0]); }
+        else { go.href = wa('Hi Guru Mantra, I want to check my chances at ' + c[0] + '.'); go.setAttribute('aria-label', 'Check my chances at ' + c[0] + ' on WhatsApp'); }
+        go.innerHTML = ARROW;
         f.appendChild(go); inn.appendChild(f); card.appendChild(inn); cards.appendChild(card);
       });
     };

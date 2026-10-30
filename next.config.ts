@@ -29,6 +29,13 @@ const nextConfig = {
       },
     ],
   },
+  // New MBA & PGDM homepage (static files in public/site). Other pages are unchanged.
+  // To go back to the old homepage, delete this rewrites() block.
+  async rewrites() {
+    return {
+      beforeFiles: [{ source: "/", destination: "/site/index.html" }],
+    };
+  },
 };
 
 module.exports = nextConfig;

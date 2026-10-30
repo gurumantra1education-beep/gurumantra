@@ -258,6 +258,24 @@ td.num { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 700
 .facts dt { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 .facts dd { margin: 4px 0 0; font-weight: 800; font-size: 17px; overflow-wrap: anywhere; }
 
+/* College detail sections */
+.about-line { color: var(--muted); }
+.contact-mini { display: flex; flex-direction: column; gap: 6px; padding: 14px; border-radius: 16px; background: var(--page); font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.contact-mini b { color: var(--ink); }
+.sec { border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
+.sec summary { list-style: none; min-height: 54px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-weight: 800; cursor: pointer; }
+.sec summary::-webkit-details-marker { display: none; }
+.sec summary .pm { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--sky); color: var(--blue-d); display: flex; align-items: center; justify-content: center; transition: transform .3s, background .3s; }
+.sec[open] summary .pm { transform: rotate(45deg); background: var(--coral); color: #fff; }
+.sec-in { padding: 0 14px 16px; display: flex; flex-direction: column; gap: 16px; }
+.tbl-title { font-size: 14px; }
+table.mini { min-width: 0; font-size: 13px; }
+table.mini th, table.mini td { padding: 9px 12px; }
+table.mini thead th { font-size: 11px; }
+table.mini td { color: var(--ink); min-width: 90px; }
+.drawer .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 420px) { .drawer .two { grid-template-columns: minmax(0, 1fr); } }
+
 /* Prose */
 .prose { display: flex; flex-direction: column; gap: 16px; max-width: 70ch; }
 .prose p { color: var(--muted); font-size: 17px; }
@@ -299,7 +317,7 @@ td.num { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 700
 
 /* Footer */
 .site-foot { background: var(--page); border-top: 1px solid var(--line); }
-.foot { padding-block: 56px 28px; display: flex; flex-direction: column; gap: 28px; }
+.site-foot .foot { padding-block: 56px 28px; display: flex; flex-direction: column; gap: 28px; }
 .fgrid { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 28px; }
 @media (max-width: 860px) { .fgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .fgrid { grid-template-columns: minmax(0, 1fr); } }

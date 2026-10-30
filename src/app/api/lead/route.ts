@@ -37,7 +37,13 @@ export async function POST(req: Request) {
   const exam = clean(body.exam, 20);
   const percentile = clean(body.percentile, 10);
   const interest = clean(body.interest, 40);
-  const course = ["MBA/PGDM", interest && interest !== "Help me decide" ? interest : "", exam && `${exam}${percentile ? ` ${percentile} %ile` : ""}`]
+  const message = clean(body.message, 400).replace(/\s+/g, " ");
+  const course = [
+    "MBA/PGDM",
+    interest && interest !== "Help me decide" ? interest : "",
+    exam && `${exam}${percentile ? ` ${percentile} %ile` : ""}`,
+    message && `Msg: ${message}`,
+  ]
     .filter(Boolean)
     .join(" · ");
 

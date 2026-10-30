@@ -64,6 +64,7 @@
       range.style.setProperty('--fill', ((n - min) / (max - min) * 100) + '%');
       out.firstChild.nodeValue = (n % 1 ? n.toFixed(1) : String(n));
       if (numIn && !fromNum) numIn.value = n;
+      document.querySelectorAll('a.btn[href^="/cat-predictor"]').forEach(function (a) { a.href = '/cat-predictor?p=' + n; });
       var list = CUT.filter(function (c) { return n - c[1] >= -2; }).sort(function (a, b) { return b[1] - a[1]; });
       tween(list.length);
       vt.textContent = list.length >= 3 ? 'B-schools within reach on CAT' : (list.length ? 'Within reach on CAT' : 'Different route, still a win');

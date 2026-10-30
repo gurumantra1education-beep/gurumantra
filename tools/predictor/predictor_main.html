@@ -1,0 +1,146 @@
+<main>
+<section class="hero page-hero">
+  <div class="wrap" style="padding-block:48px 40px">
+    <div class="head">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>CAT Predictor</span></nav>
+      <span class="note">free · no sign-up · instant</span>
+      <h1 class="h1">CAT college <span class="scrib">predictor<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14 C 50 4, 120 4, 197 12"></path></svg></span></h1>
+      <p class="lead">Your percentile (or raw score), category and profile, checked against the CAT cutoffs of <b id="cp-n-cut">300+</b> MBA and PGDM colleges, IIMs included. Plus <b id="cp-n-open">1,000+</b> more colleges that take CAT, MAT or CMAT without a published cutoff.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cp-wrap">
+  <div class="wrap cp-layout">
+    <form class="cp-form" id="cp-form" novalidate>
+      <fieldset class="cp-step">
+        <legend><span class="cp-n">1</span> Your CAT result</legend>
+        <div class="switch cp-mode" role="group" aria-label="I know my">
+          <button type="button" data-mode="pct" aria-pressed="true">Percentile</button>
+          <button type="button" data-mode="score" aria-pressed="false">Score</button>
+        </div>
+        <div data-mode-panel="pct" class="stack">
+          <div class="prow"><label for="cp-pct">Overall percentile</label><output id="cp-pct-out" class="pval" for="cp-pct">55<small>%ile</small></output></div>
+          <input id="cp-pct" type="range" min="1" max="100" step="0.1" value="55">
+          <div class="field"><label for="cp-pct-num">Or type it exactly</label><input id="cp-pct-num" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="55"></div>
+        </div>
+        <div data-mode-panel="score" class="stack" hidden>
+          <div class="field"><label for="cp-score">CAT score (out of 198)</label><input id="cp-score" type="number" inputmode="decimal" min="-66" max="198" step="0.5" placeholder="e.g. 32"></div>
+          <p class="small" id="cp-score-note">We'll estimate your percentile from recent CAT score trends.</p>
+        </div>
+        <details class="cp-more">
+          <summary>Add sectional percentiles <span class="small">(for IIM sectional cutoffs)</span></summary>
+          <div class="cp-three">
+            <div class="field"><label for="cp-varc">VARC</label><input id="cp-varc" type="number" inputmode="decimal" min="0" max="100" step="0.01" placeholder="%ile"></div>
+            <div class="field"><label for="cp-dilr">DILR</label><input id="cp-dilr" type="number" inputmode="decimal" min="0" max="100" step="0.01" placeholder="%ile"></div>
+            <div class="field"><label for="cp-qa">QA</label><input id="cp-qa" type="number" inputmode="decimal" min="0" max="100" step="0.01" placeholder="%ile"></div>
+          </div>
+        </details>
+      </fieldset>
+
+      <fieldset class="cp-step">
+        <legend><span class="cp-n">2</span> About you</legend>
+        <div class="two">
+          <div class="field"><label for="cp-cat">Category</label><select id="cp-cat"><option value="GEN">General</option><option value="EWS">EWS</option><option value="OBC">NC-OBC</option><option value="SC">SC</option><option value="ST">ST</option><option value="PWD">PwD</option></select></div>
+          <div class="field"><label for="cp-gender">Gender</label><select id="cp-gender"><option value="m">Male</option><option value="f">Female</option><option value="t">Transgender</option></select></div>
+        </div>
+        <details class="cp-more">
+          <summary>Add academics &amp; work experience <span class="small">(sharper for top B-schools)</span></summary>
+          <div class="cp-three">
+            <div class="field"><label for="cp-10">10th %</label><input id="cp-10" type="number" inputmode="decimal" min="30" max="100" step="0.1" placeholder="e.g. 82"></div>
+            <div class="field"><label for="cp-12">12th %</label><input id="cp-12" type="number" inputmode="decimal" min="30" max="100" step="0.1" placeholder="e.g. 76"></div>
+            <div class="field"><label for="cp-ug">Graduation %</label><input id="cp-ug" type="number" inputmode="decimal" min="30" max="100" step="0.1" placeholder="e.g. 68"></div>
+          </div>
+          <div class="two">
+            <div class="field"><label for="cp-stream">Graduation stream</label><select id="cp-stream"><option value="">Select</option><option value="eng">Engineering</option><option value="com">Commerce / BBA</option><option value="sci">Science</option><option value="arts">Arts / Humanities</option><option value="oth">Other</option></select></div>
+            <div class="field"><label for="cp-wx">Work experience</label><select id="cp-wx"><option value="0">Fresher</option><option value="6">Under 1 year</option><option value="18">1–2 years</option><option value="30">2–3 years</option><option value="48">3+ years</option></select></div>
+          </div>
+        </details>
+      </fieldset>
+
+      <fieldset class="cp-step">
+        <legend><span class="cp-n">3</span> Preferences <span class="small" style="font-weight:600">optional</span></legend>
+        <div class="two">
+          <div class="field"><label for="cp-state">State</label><select id="cp-state"><option value="">All India</option></select></div>
+          <div class="field"><label for="cp-fee">Max total fees</label><select id="cp-fee"><option value="">Any budget</option><option value="5">Up to ₹5 L</option><option value="8">Up to ₹8 L</option><option value="12">Up to ₹12 L</option><option value="18">Up to ₹18 L</option><option value="25">Up to ₹25 L</option></select></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="cp-own">College type</label><select id="cp-own"><option value="">Government &amp; private</option><option value="G">Government</option><option value="P">Private</option></select></div>
+          <div class="field"><label for="cp-prog">Course</label><select id="cp-prog"><option value="">MBA &amp; PGDM</option><option value="MBA">MBA</option><option value="PGDM">PGDM</option></select></div>
+        </div>
+      </fieldset>
+      <button class="btn btn-coral full" type="submit">Show my colleges →</button>
+      <p class="small" style="text-align:center">Updates as you type. Nothing is stored.</p>
+    </form>
+
+    <div class="cp-results" id="cp-results" aria-live="polite">
+      <div class="cp-summary">
+        <div class="cp-big"><span class="num" id="cp-total">0</span><p><b id="cp-total-t">colleges within reach</b><span id="cp-total-s" class="small"></span></p></div>
+        <div class="cp-bands" role="tablist" aria-label="Chance">
+          <button type="button" role="tab" data-band="all" aria-selected="true"><b id="cp-c-all">0</b><span>All</span></button>
+          <button type="button" role="tab" data-band="safe" aria-selected="false"><b id="cp-c-safe">0</b><span>Safe</span></button>
+          <button type="button" role="tab" data-band="good" aria-selected="false"><b id="cp-c-good">0</b><span>Good chance</span></button>
+          <button type="button" role="tab" data-band="reach" aria-selected="false"><b id="cp-c-reach">0</b><span>Reach</span></button>
+          <button type="button" role="tab" data-band="dream" aria-selected="false"><b id="cp-c-dream">0</b><span>Dream</span></button>
+        </div>
+        <p class="small" id="cp-profile-note" hidden></p>
+      </div>
+
+      <div class="cp-tools">
+        <div class="field cp-search"><label for="cp-q" class="sr">Search colleges</label><input id="cp-q" type="search" placeholder="Search a college or city"></div>
+        <div class="field"><label for="cp-sort" class="sr">Sort</label><select id="cp-sort"><option value="cut">Sort: highest cutoff</option><option value="chance">Sort: best chance</option><option value="fee">Sort: lowest fees</option><option value="pkg">Sort: highest package</option></select></div>
+      </div>
+
+      <div class="cp-list" id="cp-list"></div>
+      <button class="btn btn-line" id="cp-more" type="button" hidden>Show more</button>
+
+      <div class="cp-actions">
+        <a class="btn btn-wa" id="cp-wa" href="#" target="_blank" rel="noopener">Share my list on WhatsApp</a>
+        <button class="btn btn-line" id="cp-csv" type="button">Download list (CSV)</button>
+        <a class="btn btn-blue" href="#counselling" id="cp-verify">Get it checked by a counsellor →</a>
+      </div>
+
+      <section class="cp-open stack" aria-labelledby="cp-open-h">
+        <div class="row-head"><h2 class="h3" id="cp-open-h">Also open to you <span class="small" id="cp-open-c"></span></h2><span class="small">No published CAT cutoff. They admit through CAT, MAT or CMAT plus their own GD/PI. Partner B-schools first.</span></div>
+        <div class="cp-list" id="cp-open-list"></div>
+        <button class="btn btn-line" id="cp-open-more" type="button" hidden>Show more</button>
+      </section>
+    </div>
+  </div>
+</section>
+
+<section class="pad-sm alt">
+  <div class="wrap stack" style="gap:28px">
+    <div class="head" style="max-width:none"><span class="hand">how it works</span><h2 class="h2">What's behind your chance</h2></div>
+    <div class="grid-3">
+      <div class="box"><h3 class="h3">Cutoff for your category</h3><p>We start with each college's previous-year CAT cutoff. Where the college publishes category-wise cutoffs we use them; IIMs use their official minimums; other government schools get a typical reservation relaxation. Private colleges usually keep one cutoff for all.</p></div>
+      <div class="box"><h3 class="h3">Your profile counts at the top</h3><p>IIMs and other top schools (cutoff 85+) score academics, work experience, gender and academic diversity, not only CAT. Strong or weak profiles move your chance there by up to 2 percentile points. Elsewhere, CAT decides.</p></div>
+      <div class="box"><h3 class="h3">Sectional cutoffs</h3><p>Add your VARC, DILR and QA percentiles. If any section is below a college's published sectional minimum for your category, we flag it, because that alone can stop a call.</p></div>
+    </div>
+    <div class="table-box">
+      <table class="mini">
+        <thead><tr><th>Chance</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag safe">Safe</span></td><td>You are 2+ percentile above the cutoff for your category.</td></tr>
+          <tr><td><span class="tag good">Good chance</span></td><td>At the cutoff or up to 2 above. Expect a call; prepare well for GD/PI.</td></tr>
+          <tr><td><span class="tag reach">Reach</span></td><td>Up to 3 below. Calls happen, especially with a strong profile. Apply.</td></tr>
+          <tr><td><span class="tag info">Dream</span></td><td>3 to 6 below. Worth one application if the fees fit; don't count on it.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small">Cutoffs change every year and differ by programme and round. Use this as a starting list, then check each college's latest notice, or let us check it for you.</p>
+  </div>
+</section>
+
+<section class="pad-sm">
+  <div class="wrap stack" style="gap:24px">
+    <div class="head"><span class="hand">quick answers</span><h2 class="h2">CAT predictor FAQs</h2></div>
+    <div class="faq">
+      <details><summary>Which colleges can I get with 50–60 percentile in CAT?<span class="pm" aria-hidden="true">+</span></summary><p>Set the slider to your percentile: you'll see every college whose published cutoff you clear, plus 1,000+ colleges that admit on CAT, MAT or CMAT without a fixed cutoff. Many good private PGDM colleges in Delhi NCR, Pune, Bangalore and Mumbai fall in this range.</p></details>
+      <details><summary>How accurate is this predictor?<span class="pm" aria-hidden="true">+</span></summary><p>It is as good as last year's cutoffs. Final calls depend on the year's applicant pool, sectional scores, profile and GD/PI. Treat Safe and Good chance as likely, Reach as possible, and Dream as a long shot.</p></details>
+      <details><summary>I only know my raw score. Can I still use it?<span class="pm" aria-hidden="true">+</span></summary><p>Yes. Switch to "Score" and enter your marks out of 198. We estimate your percentile from recent CAT score-to-percentile trends. Your scorecard percentile is always more accurate.</p></details>
+      <details><summary>Do private colleges have category relaxation?<span class="pm" aria-hidden="true">+</span></summary><p>Most private PGDM colleges have one cutoff for all categories. IIMs, IITs and government universities relax cutoffs for EWS, NC-OBC, SC, ST and PwD candidates, which the predictor applies when you choose your category.</p></details>
+      <details><summary>My percentile is low. Is an MBA still possible?<span class="pm" aria-hidden="true">+</span></summary><p>Yes. Look at the "Also open to you" list, and consider MAT and CMAT, which have later windows. This is exactly what Guru Mantra helps with: a shortlist that fits your score, budget and city.</p></details>
+    </div>
+  </div>
+</section>

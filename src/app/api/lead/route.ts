@@ -29,6 +29,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Name and a 10-digit phone number are required" }, { status: 400 });
   }
 
+  const email = clean(body.email, 120);
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    return NextResponse.json({ ok: false, error: "Please enter a valid email" }, { status: 400 });
+  }
+
   const exam = clean(body.exam, 20);
   const percentile = clean(body.percentile, 10);
   const interest = clean(body.interest, 40);
@@ -45,7 +50,7 @@ export async function POST(req: Request) {
   const { error } = await supabase.from("enquiries").insert([
     {
       name,
-      email: clean(body.email, 120),
+      email,
       phone,
       state: clean(body.city, 60),
       course,

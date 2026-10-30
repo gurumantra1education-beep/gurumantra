@@ -170,15 +170,16 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var get = function (n) { var f = form.querySelector('[name="' + n + '"]'); return f ? f.value.trim() : ''; };
-      var data = { name: get('name'), phone: get('phone'), exam: get('exam'), percentile: get('percentile'), interest: get('interest'), city: get('city'), message: get('message'), page: document.title, time: new Date().toISOString() };
-      var ok = data.name.length > 1 && data.phone.replace(/\D/g, '').length >= 10;
+      var data = { name: get('name'), phone: get('phone'), email: get('email'), exam: get('exam'), percentile: get('percentile'), interest: get('interest'), city: get('city'), message: get('message'), page: document.title, time: new Date().toISOString() };
+      var emailOk = !data.email || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email);
+      var ok = data.name.length > 1 && data.phone.replace(/\D/g, '').length >= 10 && emailOk;
       var err = form.querySelector('.err'); if (err) err.hidden = ok;
       if (!ok) return;
       if (CFG.formEndpoint) {
         var sameSite = CFG.formEndpoint.charAt(0) === '/';
         try { fetch(CFG.formEndpoint, { method: 'POST', mode: sameSite ? 'same-origin' : 'no-cors', keepalive: true, headers: { 'Content-Type': sameSite ? 'application/json' : 'text/plain;charset=utf-8' }, body: JSON.stringify(data) }).catch(function () {}); } catch (x) {}
       }
-      var msg = 'Hi Guru Mantra, I want free MBA/PGDM counselling.\nName: ' + data.name + '\nPhone: ' + data.phone +
+      var msg = 'Hi Guru Mantra, I want free MBA/PGDM counselling.\nName: ' + data.name + '\nPhone: ' + data.phone + (data.email ? '\nEmail: ' + data.email : '') +
         (data.exam ? '\nExam: ' + data.exam : '') + (data.percentile ? '\nPercentile: ' + data.percentile : '') +
         (data.interest ? '\nInterested in: ' + data.interest : '') + (data.city ? '\nPreferred city: ' + data.city : '') +
         (data.message ? '\nMessage: ' + data.message : '');

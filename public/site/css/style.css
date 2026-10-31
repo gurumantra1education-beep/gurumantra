@@ -433,3 +433,27 @@ a.cp-row:hover { border-color: var(--blue); box-shadow: var(--shadow); transform
   .cp-tools { grid-template-columns: 1fr; }
   .cp-actions .btn { width: 100%; }
 }
+
+/* ---------- Homepage hero: paper plane through a giant "MBA" ---------- */
+.hero > .wrap { z-index: 5; }
+.gm-fly { position: absolute; inset: 0; pointer-events: none; }
+.gm-word { position: absolute; left: max(8px, calc(50% - 610px)); top: max(70px, 14%); display: flex; font-family: var(--display); font-weight: 800; font-size: clamp(170px, 24vw, 340px); line-height: .8; letter-spacing: -0.06em; white-space: nowrap; user-select: none; }
+.gm-word span { display: block; padding-inline: .02em; }
+.gm-word.back { z-index: 1; color: #DCEEF7; -webkit-text-stroke: 2px #B9DAEA; animation: gmWord 1.2s ease-out both; }
+.gm-word.front { z-index: 3; color: #DCEEF7; -webkit-text-stroke: 2px #B9DAEA; animation: gmWord 1.2s ease-out both; }
+.gm-word.front span:not(:nth-child(2)) { visibility: hidden; }
+@keyframes gmWord { from { opacity: 0; transform: translateY(10%); } to { opacity: 1; transform: none; } }
+.gm-trail { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; overflow: visible; }
+.gm-trail .ink { fill: none; stroke: var(--coral); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 2 10; opacity: .75; transition: opacity 1.2s ease; }
+.hero.plane-landed .gm-trail .ink { opacity: 0; transition: opacity 2.4s ease .6s; }
+.gm-trail .reveal { stroke-dashoffset: 99999; }
+.gm-plane { position: absolute; left: 0; top: 0; z-index: 4; width: 132px; height: 64px; transform: translate(-300px, -300px); will-change: transform; cursor: pointer; pointer-events: none; filter: drop-shadow(0 14px 12px rgba(20,33,43,.18)); }
+.gm-plane.landed { pointer-events: auto; }
+.gm-plane-in { width: 100%; height: 100%; transform-origin: 60% 50%; }
+.gm-plane-in svg { display: block; width: 100%; height: 100%; }
+.gm-plane.landed .gm-plane-in { animation: gmBob 3.2s ease-in-out infinite; }
+@keyframes gmBob { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-5px) rotate(-2deg); } }
+.gm-plane-note { position: absolute; right: 100%; top: -18px; font-family: var(--hand); font-size: 20px; color: var(--coral); white-space: nowrap; opacity: 0; transition: opacity .3s; transform: rotate(8deg); pointer-events: none; }
+.gm-plane.landed:hover .gm-plane-note, .gm-plane.landed:focus-visible .gm-plane-note { opacity: 1; }
+@media (max-width: 960px) { .gm-plane { width: 96px; height: 47px; } .gm-word { top: 24%; left: 4px; font-size: clamp(150px, 42vw, 300px); } }
+@media (prefers-reduced-motion: reduce) { .gm-plane.landed .gm-plane-in { animation: none; } }

@@ -8,7 +8,7 @@ import { Trash2, Search } from "lucide-react";
 // ======================
 // CONFIGURABLE CREDENTIALS
 // ======================
-const AUTH_EMAIL = "gurumantra871@gmail.com";
+const AUTH_EMAIL = "vivekgurumantra@gmail.com";
 const AUTH_PASSWORD = "Gurumantra_Lead_Page_890@#";
 
 interface Enquiry {

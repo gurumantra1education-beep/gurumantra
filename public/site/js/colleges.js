@@ -46,11 +46,10 @@
     list.slice(0, limit).forEach(function (o, i) {
       var card = el('article', 'card'), inn = el('div', 'card-in'), top = el('div', 'top'), t = el('div', 'tt');
       top.appendChild(el('span', 'mono', ini(o.n)));
-      t.appendChild(el('h3', null, o.n)); t.appendChild(el('span', 'where', [o.c, o.s].filter(Boolean).join(', ')));
+      var h3 = el('h3'), nm = el('a', 'stretch', o.n); nm.href = '/mba-colleges/' + o.u; h3.appendChild(nm); t.appendChild(h3); t.appendChild(el('span', 'where', [o.c, o.s].filter(Boolean).join(', ')));
       top.appendChild(t); inn.appendChild(top);
       var badges = el('div', 'badges');
       badges.appendChild(el('span', 'tag info', o.p.replace('/', ' / ')));
-      if (o.pt) badges.appendChild(el('span', 'tag reach', 'Guru Mantra partner'));
       if (o.r) badges.appendChild(el('span', 'tag good', '★ ' + o.r));
       inn.appendChild(badges);
       var dl = el('dl');
@@ -58,8 +57,7 @@
       inn.appendChild(dl);
       var f = el('div', 'foot');
       f.appendChild(el('span', 'ex', o.e.length ? o.e.slice(0, 4).join(' · ') + (o.e.length > 4 ? ' +' + (o.e.length - 4) : '') : 'Direct / institute admission'));
-      var go = el('button', 'go'); go.type = 'button'; go.setAttribute('aria-label', 'View full details for ' + o.n); go.innerHTML = GM.ARROW;
-      go.addEventListener('click', function () { openDrawer(o, go); });
+      var go = el('a', 'go'); go.href = '/mba-colleges/' + o.u; go.setAttribute('aria-label', 'View full details for ' + o.n); go.innerHTML = GM.ARROW;
       f.appendChild(go); inn.appendChild(f); card.appendChild(inn);
       card.style.animationDelay = (i % 6) * 0.04 + 's';
       cards.appendChild(card);
@@ -128,7 +126,6 @@
     $('d-exams').textContent = o.e.length ? o.e.join(' · ') : 'Direct / institute admission';
     var ap = $('d-approvals'); ap.textContent = o.ap || ''; ap.parentElement.hidden = !o.ap;
     var site = $('d-site'); site.hidden = !o.w; if (o.w) { site.href = o.w; site.textContent = 'Official website: ' + o.w.replace(/^https?:\/\//, '').replace(/\/$/, ''); }
-    $('d-partner').hidden = !o.pt;
     $('d-page').href = '/mba-colleges/' + o.u;
     $('d-wa').href = GM.wa('Hi Guru Mantra, I want to check my chances at ' + o.n + (o.c ? ', ' + o.c : '') + '.');
     body.textContent = ''; body.appendChild(el('p', 'small', 'Loading full details…'));

@@ -70,7 +70,7 @@ export default function ContactUs() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-gray-800">Email</p>
-                  <p className="text-gray-600">gurumantra871@gmail.com</p>
+                  <p className="text-gray-600">vivekgurumantra@gmail.com</p>
                 </div>
               </div>
 

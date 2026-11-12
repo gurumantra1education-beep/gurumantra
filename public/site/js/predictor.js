@@ -100,7 +100,7 @@
     main.appendChild(t);
     var meta = [r.c, r.s && r.s !== r.c ? r.s : '', r.o === 'G' ? 'Government' : r.o === 'P' ? 'Private' : '', r.r ? 'NIRF #' + r.r : ''].filter(Boolean).join(' · ');
     main.appendChild(el('span', 'small', meta));
-    if (r.pt) { var p = el('span', 'cp-pt', 'Guru Mantra partner'); main.appendChild(p); }
+    
     a.appendChild(main);
 
     var cut = el('div', 'cp-cell');
@@ -138,7 +138,7 @@
     var main = el('div', 'cp-main');
     main.appendChild(el('b', null, r[0]));
     main.appendChild(el('span', 'small', [r[2], r[3] && r[3] !== r[2] ? r[3] : '', r[4] === 'G' ? 'Government' : r[4] === 'P' ? 'Private' : ''].filter(Boolean).join(' · ')));
-    if (r[8]) main.appendChild(el('span', 'cp-pt', 'Guru Mantra partner'));
+    
     a.appendChild(main);
     var ex = el('div', 'cp-cell'); ex.appendChild(el('span', 'cp-k', 'Accepts')); ex.appendChild(el('b', null, r[7].replace(/\//g, ', '))); a.appendChild(ex);
     var fee = el('div', 'cp-cell'); fee.appendChild(el('span', 'cp-k', 'Fees')); fee.appendChild(el('b', null, money(r[5]))); a.appendChild(fee);

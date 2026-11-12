@@ -104,7 +104,7 @@
           full.appendChild(sec);
         });
         var sec2 = el('section', 'stack');
-        var h2 = el('div', 'row-head'); h2.appendChild(el('h3', 'h3', 'Also open to you: no published CAT cutoff')); h2.appendChild(el('span', 'small', 'These colleges admit through CAT, MAT or CMAT plus their own GD/PI. Partner B-schools first.'));
+        var h2 = el('div', 'row-head'); h2.appendChild(el('h3', 'h3', 'Also open to you: no published CAT cutoff')); h2.appendChild(el('span', 'small', 'These colleges admit through CAT, MAT or CMAT plus their own GD/PI. Featured colleges first.'));
         sec2.appendChild(h2);
         var box2 = el('div', 'grid-2');
         ROUTES.slice(0, 12).forEach(function (r) { box2.appendChild(matchEl(r[0], (r[2] ? r[2] + ' · ' : '') + 'Accepts ' + r[3] + (r[4] ? ' · Avg ₹' + r[4] + ' LPA' : ''), 'Open', 'info', r[1])); });
@@ -136,7 +136,7 @@
         var card = el('article', 'card'), inn = el('div', 'card-in'), top = el('div', 'top'), t = el('div', 'tt');
         top.appendChild(el('span', 'mono', ini(c[0])));
         var h3 = el('h3');
-        if (c[7]) { var hl = el('a', null, c[0]); hl.href = '/mba-colleges/' + c[7]; hl.style.textDecoration = 'none'; h3.appendChild(hl); } else h3.textContent = c[0];
+        if (c[7]) { var hl = el('a', 'stretch', c[0]); hl.href = '/mba-colleges/' + c[7]; hl.style.textDecoration = 'none'; h3.appendChild(hl); } else h3.textContent = c[0];
         t.appendChild(h3); t.appendChild(el('span', 'where', c[1] + ' · ' + c[2]));
         top.appendChild(t); inn.appendChild(top);
         var dl = el('dl');
